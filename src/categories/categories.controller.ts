@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -17,8 +18,8 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  getCategopries() {
-    return this.categoriesService.getCategories();
+  getCategopries(@Query('search') search?: string) {
+    return this.categoriesService.getCategories(search);
   }
 
   @Get('/:id')

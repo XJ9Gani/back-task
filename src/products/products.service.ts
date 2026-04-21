@@ -17,28 +17,104 @@ export class ProductsService {
     },
     {
       id: 2,
-      name: 'Iphone 16',
-      description: 'New Iphone 16',
-      price: 20000,
-      category: 'Electronics',
+      name: 'Apple Juice',
+      description: 'Fresh apple juice',
+      price: 150,
+      category: 'Food',
       createdAt: new Date(),
       updatedAt: '',
       deletedAt: '',
     },
     {
       id: 3,
+      name: 'Apple Pie',
+      description: 'Sweet apple pie',
+      price: 200,
+      category: 'Food',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 4,
+      name: 'Samsung Galaxy S24',
+      description: 'Flagship Samsung phone',
+      price: 18000,
+      category: 'Electronics',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 5,
+      name: 'Samsung TV',
+      description: 'Smart TV 55 inch',
+      price: 25000,
+      category: 'Electronics',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 6,
+      name: 'Samsung Buds',
+      description: 'Wireless earbuds',
+      price: 5000,
+      category: 'Electronics',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 7,
       name: 'Socks',
-      description: 'Two items here',
+      description: 'Basic socks',
       price: 300,
       category: 'Clothing',
       createdAt: new Date(),
       updatedAt: '',
       deletedAt: '',
     },
+    {
+      id: 8,
+      name: 'Socks Sport',
+      description: 'Sport socks',
+      price: 400,
+      category: 'Clothing',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 9,
+      name: 'Socks Winter',
+      description: 'Warm winter socks',
+      price: 500,
+      category: 'Clothing',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
+    {
+      id: 10,
+      name: 'Sandwich',
+      description: 'Chicken sandwich',
+      price: 700,
+      category: 'Food',
+      createdAt: new Date(),
+      updatedAt: '',
+      deletedAt: '',
+    },
   ];
 
-  getProducts() {
-    return this.products;
+  getProducts(search?: string) {
+    if (!search || search.length === 0) return this.products;
+
+    const filteredProducts = this.products.filter((product) => {
+      return product.name.toLowerCase().includes(search.toLowerCase());
+    });
+
+    return filteredProducts;
   }
 
   getProductById(id: string) {
