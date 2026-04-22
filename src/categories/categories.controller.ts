@@ -48,7 +48,7 @@ export class CategoriesController {
     );
     res.setHeader(
       'Content-Disposition',
-      'attachment; filename=' + 'report.xlsx',
+      'attachment; filename=' + 'categories.xlsx',
     );
 
     await workbook.xlsx.write(res);

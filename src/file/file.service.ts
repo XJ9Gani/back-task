@@ -15,7 +15,7 @@ export class FileService {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    fs.writeFileSync(filePath, file.buffer as Buffer);
+    fs.writeFileSync(filePath, file.buffer);
 
     return {
       path: filePath,

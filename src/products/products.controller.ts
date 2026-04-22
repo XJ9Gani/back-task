@@ -50,7 +50,7 @@ export class ProductsController {
     );
     res.setHeader(
       'Content-Disposition',
-      'attachment; filename=' + 'report.xlsx',
+      'attachment; filename=' + 'products.xlsx',
     );
 
     await workbook.xlsx.write(res);
