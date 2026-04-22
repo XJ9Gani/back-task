@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -74,5 +75,10 @@ export class CategoriesController {
   @Delete('/:id')
   deleteCategory(@Param('id') id: number) {
     return this.categoriesService.deleteCategory(id);
+  }
+
+  @Patch('/:id')
+  updateOneProperty(@Param('id') id: number, @Body() dto: UpdateCategoryDto) {
+    return this.categoriesService.updateOneProperty(id, dto);
   }
 }

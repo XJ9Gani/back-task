@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -69,6 +70,11 @@ export class ProductsController {
   @Put('/:id')
   UpdateProduct(@Param('id') id: number, @Body() dto: UpdateProductDto) {
     return this.productsService.updateProduct(id, dto);
+  }
+
+  @Patch('/:id')
+  updateOneProperty(@Param('id') id: number, @Body() dto: UpdateProductDto) {
+    return this.productsService.updateOneProperty(id, dto);
   }
 
   @Delete('/:id')

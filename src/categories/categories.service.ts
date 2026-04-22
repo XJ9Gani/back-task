@@ -48,6 +48,17 @@ export class CategoriesService {
     return await this.categoryRepository.save(category);
   }
 
+  async updateOneProperty(
+    id: number,
+    dto: UpdateCategoryDto,
+  ): Promise<Category> {
+    const category = await this.getCategoryById(id);
+
+    Object.assign(category, dto);
+
+    return this.categoryRepository.save(category);
+  }
+
   async deleteCategory(id: number): Promise<Category> {
     const category = await this.getCategoryById(id);
 

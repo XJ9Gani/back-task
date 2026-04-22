@@ -56,19 +56,17 @@ export class ProductsService {
     return await this.productRepository.save(product);
   }
 
+  async updateOneProperty(id: number, dto: UpdateProductDto): Promise<Product> {
+    const category = await this.getProductById(id);
+
+    Object.assign(category, dto);
+
+    return this.productRepository.save(category);
+  }
+
   async deleteProduct(id: number): Promise<Product> {
     const product = await this.getProductById(id);
 
     return await this.productRepository.remove(product);
   }
-
-  // getProducts(search?: string) {
-  //   if (!search || search.length === 0) return this.products;
-
-  //   const filteredProducts = this.products.filter((product) => {
-  //     return product.name.toLowerCase().includes(search.toLowerCase());
-  //   });
-
-  //   return filteredProducts;
-  // }
 }
