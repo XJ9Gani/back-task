@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
@@ -21,13 +20,13 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  getProducts(@Query('search') search?: string) {
+  getAllProducts(@Query('search') search?: string) {
     return this.productsService.getProducts(search);
   }
 
   @Get('/excel')
   async getProductsExcel(@Res() res: express.Response) {
-    const data = this.productsService.getProducts();
+    const data = await this.productsService.getProducts();
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Products');
 
@@ -57,27 +56,19 @@ export class ProductsController {
     res.end();
   }
 
-  @Get('/:id')
-  getProductById(@Param('id') id: string) {
-    return this.productsService.getProductById(id);
+  @Post()
+  creatProduct(@Body() dto: CreateProductDto) {
+    return this.productsService.creatProduct(dto);
   }
 
-  @Post()
-  createProduct(@Body() dto: CreateProductDto) {
-    return this.productsService.createProduct(dto);
+  @Get('/:id')
+  getProductById(@Param('id') id: string) {
+    return this.productsService.getProductById(+id);
   }
 
   @Put('/:id')
   UpdateProduct(@Param('id') id: number, @Body() dto: UpdateProductDto) {
     return this.productsService.updateProduct(id, dto);
-  }
-
-  @Patch('/:id')
-  UpdateOneProperty(
-    @Param('id') id: number,
-    @Body() dto: Partial<UpdateProductDto>,
-  ) {
-    return this.productsService.updateOneProperty(id, dto);
   }
 
   @Delete('/:id')

@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
   Query,
@@ -21,13 +20,13 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  getCategopries(@Query('search') search?: string) {
+  getAllProducts(@Query('search') search?: string) {
     return this.categoriesService.getCategories(search);
   }
 
   @Get('/excel')
   async getProductsExcel(@Res() res: express.Response) {
-    const data = this.categoriesService.getCategories();
+    const data = await this.categoriesService.getCategories();
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Products');
 
@@ -35,6 +34,8 @@ export class CategoriesController {
       { header: 'Id', key: 'id', width: 10 },
       { header: 'name', key: 'name', width: 30 },
       { header: 'description', key: 'description', width: 40 },
+      { header: 'price', key: 'price', width: 20 },
+      { header: 'category', key: 'category', width: 20 },
       { header: 'createdAt', key: 'createdAt', width: 20 },
       { header: 'category', key: 'updatedAt', width: 20 },
       { header: 'deletedAt', key: 'deletedAt', width: 20 },
@@ -48,31 +49,26 @@ export class CategoriesController {
     );
     res.setHeader(
       'Content-Disposition',
-      'attachment; filename=' + 'categories.xlsx',
+      'attachment; filename=' + 'products.xlsx',
     );
 
     await workbook.xlsx.write(res);
     res.end();
   }
 
-  @Get('/:id')
-  getCategoryById(@Param('id') id: string) {
-    return this.categoriesService.getCategoryById(id);
+  @Post()
+  creatCategory(@Body() dto: CreateCategoryDto) {
+    return this.categoriesService.creatCategory(dto);
   }
 
-  @Post()
-  CreateCategory(@Body() dto: CreateCategoryDto) {
-    return this.categoriesService.createCategory(dto);
+  @Get('/:id')
+  getCategoryById(@Param('id') id: string) {
+    return this.categoriesService.getCategoryById(+id);
   }
 
   @Put('/:id')
   updateCategory(@Param('id') id: number, @Body() dto: UpdateCategoryDto) {
     return this.categoriesService.updateCategory(id, dto);
-  }
-
-  @Patch('/:id')
-  updateOneProperty(@Param('id') id: number, @Body() dto: UpdateCategoryDto) {
-    return this.categoriesService.updateOneProperty(id, dto);
   }
 
   @Delete('/:id')
