@@ -5,16 +5,14 @@ import {
   Entity,
   UpdateDateColumn,
   DeleteDateColumn,
-  PrimaryColumn,
-  Generated,
   ManyToOne,
   JoinColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
 export class Product {
-  @PrimaryColumn()
-  @Generated('increment')
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -25,6 +23,9 @@ export class Product {
 
   @Column()
   price: number;
+
+  @Column()
+  stock: number;
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'categoryId' })
