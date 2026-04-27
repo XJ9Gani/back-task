@@ -59,11 +59,11 @@ export class ProductsService {
   }
 
   async updateOneProperty(id: number, dto: UpdateProductDto): Promise<Product> {
-    const category = await this.getProductById(id);
+    const product = await this.getProductById(id);
 
-    Object.assign(category, dto);
+    Object.assign(product, dto);
 
-    return this.productRepository.save(category);
+    return this.productRepository.save(product);
   }
 
   async deleteProduct(id: number): Promise<Product> {

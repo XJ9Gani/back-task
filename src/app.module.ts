@@ -4,8 +4,6 @@ import { CategoriesModule } from './categories/categories.module';
 import { FileModule } from './file/file.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-// import { Product } from './products/entity/product.entity';
-// import { Category } from './categories/entity/category.entity';
 import { OrdersModule } from './orders/orders.module';
 import { OrderDetailsModule } from './order_details/order_details.module';
 
@@ -24,7 +22,6 @@ import { OrderDetailsModule } from './order_details/order_details.module';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: 'postgres',
-        // entities: [Product, Category],
         autoLoadEntities: true,
         synchronize: false,
       }),

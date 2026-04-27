@@ -1,17 +1,21 @@
-import { IsString, IsNumber, IsPositive, isString } from 'class-validator';
-import { CreateDateColumn } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateOrderDto {
-  @CreateDateColumn()
-  date: string;
-
   @IsNumber()
+  @ApiProperty({
+    description: 'Available discount in percent',
+    example: 15,
+  })
   discount: number;
 
   @IsString()
   customer_name: string;
 
   @IsString()
+  @ApiProperty({
+    example: 'Pending',
+  })
   status: string;
 
   @IsNumber()

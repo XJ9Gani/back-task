@@ -14,6 +14,7 @@ export class InitialSchema1776932874525 implements MigrationInterface {
 
     await queryRunner.query(`
       CREATE TABLE order_details (
+        id SERIAL,
         order_id INT NOT NULL,
         product_id INT NOT NULL,
         quantity INT DEFAULT 0,
@@ -29,58 +30,6 @@ export class InitialSchema1776932874525 implements MigrationInterface {
           ON DELETE CASCADE
       );
     `);
-
-    // await queryRunner.createTable(
-    //   new Table({
-    //     name: 'orders',
-    //     columns: [
-    //       {
-    //         name: 'id',
-    //         type: 'int',
-    //         isPrimary: true,
-    //         isGenerated: true,
-    //         generationStrategy: 'increment',
-    //         isNullable: false,
-    //       },
-    //       {
-    //         name: 'date',
-    //         type: 'varchar',
-    //         isNullable: false,
-    //       },
-    //       {
-    //         name: 'discount',
-    //         type: 'int',
-    //       },
-    //       {
-    //         name: 'customer_name',
-    //         type: 'varchar',
-    //         isNullable: false,
-    //       },
-    //       {
-    //         name: 'status',
-    //         type: 'varchar',
-    //         isNullable: false,
-    //       },
-    //     ],
-    //   }),
-    // );
-
-    // await queryRunner.createTable(
-    //   new Table({
-    //     name: 'oreder_details',
-    //     columns: [
-    //       {
-    //         name: 'product_id',
-    //         type: 'int',
-    //         isNullable: false,
-    //       },
-    //       {
-    //         name: 'quantity',
-    //         type: 'int',
-    //       },
-    //     ],
-    //   }),
-    // );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
