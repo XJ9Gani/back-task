@@ -31,12 +31,28 @@ export class OrdersController {
     return this.ordersService.getAllOrders();
   }
 
+  @Get('/details')
+  @ApiOperation({
+    summary: 'Return order details with additional info',
+  })
+  getAllOrderDetails() {
+    return this.ordersService.getAllOrderDetails();
+  }
+
   @Get('/:id')
   @ApiOperation({
     summary: 'Returns one order transactions',
   })
   getOneOrder(@Param('id', ParseIntPipe) id: number) {
     return this.ordersService.getOneOrder(id);
+  }
+
+  @Get('/details/:id')
+  @ApiOperation({
+    summary: 'Return one order details with additional info',
+  })
+  getOneOrderDetails(@Param('id', ParseIntPipe) id: number) {
+    return this.ordersService.getOneOrderDetails(id);
   }
 
   @Post()

@@ -1,8 +1,8 @@
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
-import { Category } from 'src/categories/entity/category.entity';
 import { InitialSchema1776932874525 } from 'src/migrations/1776932874525-initial-schema';
-import { Product } from 'src/products/entity/product.entity';
+import { Category } from 'src/modules/categories/entity/category.entity';
+import { Product } from 'src/modules/products/entity/product.entity';
 import { DataSource } from 'typeorm';
 
 config();

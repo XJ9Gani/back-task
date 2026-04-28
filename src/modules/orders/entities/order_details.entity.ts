@@ -1,5 +1,3 @@
-import { Order } from 'src/orders/entities/order.entity';
-import { Product } from 'src/products/entity/product.entity';
 import {
   Column,
   Entity,
@@ -7,6 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Order } from './order.entity';
+import { Product } from 'src/modules/products/entity/product.entity';
 
 @Entity('order_details')
 export class OrderDetails {

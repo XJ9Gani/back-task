@@ -1,4 +1,4 @@
-import { OrderDetails } from 'src/order_details/entity/order_details.entity';
+import { OrderDetails } from 'src/modules/orders/entities/order_details.entity';
 import {
   Column,
   Entity,

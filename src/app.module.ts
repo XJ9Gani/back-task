@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from './products/products.module';
-import { CategoriesModule } from './categories/categories.module';
 import { FileModule } from './file/file.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { OrdersModule } from './orders/orders.module';
-import { OrderDetailsModule } from './order_details/order_details.module';
+import { ProductsModule } from './modules/products/products.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -28,7 +27,6 @@ import { OrderDetailsModule } from './order_details/order_details.module';
       inject: [ConfigService],
     }),
     OrdersModule,
-    OrderDetailsModule,
   ],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Category } from 'src/categories/entity/category.entity';
+import { Category } from 'src/modules/categories/entity/category.entity';
 import {
   Column,
   CreateDateColumn,
