@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { FileModule } from './file/file.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { FileModule } from './modules/file/file.module';
 
 @Module({
   imports: [
