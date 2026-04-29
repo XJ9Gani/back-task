@@ -58,12 +58,18 @@ export class ProductsService {
     return await this.productRepository.save(product);
   }
 
-  async updateOneProperty(id: number, dto: UpdateProductDto): Promise<Product> {
+  async updateOneProperty(
+    id: number,
+    dto: Partial<UpdateProductDto>,
+  ): Promise<Product> {
     const product = await this.getProductById(id);
 
-    Object.assign(product, dto);
+    Object.assign(product, {
+      ...dto,
+      category: { categoryId: dto.categoryId },
+    });
 
-    return this.productRepository.save(product);
+    return await this.productRepository.save(product);
   }
 
   async deleteProduct(id: number): Promise<Product> {
@@ -84,7 +90,7 @@ export class ProductsService {
       { header: 'price', key: 'price', width: 20 },
       { header: 'category', key: 'category', width: 20 },
       { header: 'createdAt', key: 'createdAt', width: 20 },
-      { header: 'category', key: 'updatedAt', width: 20 },
+      { header: 'updatedAt', key: 'updatedAt', width: 20 },
       { header: 'deletedAt', key: 'deletedAt', width: 20 },
     ];
 

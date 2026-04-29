@@ -78,7 +78,10 @@ export class OrdersService {
   }
 
   @Transactional()
-  async updateOneProperty(id: number, dto: UpdateOrderDto): Promise<Order> {
+  async updateOneProperty(
+    id: number,
+    dto: Partial<UpdateOrderDto>,
+  ): Promise<Order> {
     const order = await this.getOneOrder(id);
 
     Object.assign(order, dto);

@@ -52,7 +52,7 @@ export class CategoriesService {
 
   async updateOneProperty(
     id: number,
-    dto: UpdateCategoryDto,
+    dto: Partial<UpdateCategoryDto>,
   ): Promise<Category> {
     const category = await this.getCategoryById(id);
 

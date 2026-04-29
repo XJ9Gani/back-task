@@ -92,7 +92,7 @@ export class ProductsController {
   })
   updateOneProperty(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: UpdateProductDto,
+    @Body() dto: Partial<UpdateProductDto>,
   ) {
     return this.productsService.updateOneProperty(id, dto);
   }

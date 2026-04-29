@@ -100,7 +100,7 @@ export class CategoriesController {
   })
   updateOneProperty(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: UpdateCategoryDto,
+    @Body() dto: Partial<UpdateCategoryDto>,
   ) {
     return this.categoriesService.updateOneProperty(id, dto);
   }
