@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Repository } from 'typeorm';
@@ -6,6 +10,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderDetails } from 'src/modules/orders/entities/order_details.entity';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Transactional } from 'typeorm-transactional';
+import { Product } from '../products/entity/product.entity';
 
 @Injectable()
 export class OrdersService {
@@ -15,6 +20,9 @@ export class OrdersService {
 
     @InjectRepository(OrderDetails)
     private readonly orderDetailsRepository: Repository<OrderDetails>,
+
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
   ) {}
 
   async getAllOrders(): Promise<Order[]> {
@@ -56,13 +64,25 @@ export class OrdersService {
   async createOrder(dto: CreateOrderDto): Promise<Order> {
     const orderEntity = this.orderRepository.create(dto);
     const order = await this.orderRepository.save(orderEntity);
+    const product = await this.productRepository.findOne({
+      where: { id: dto.product_id },
+      select: ['id', 'stock'],
+    });
+
+    if (product && dto.quantity > product?.stock)
+      throw new BadRequestException('Not enought in stock');
 
     const details = {
       order,
-      product: { id: dto.product_id },
+      product: { id: product?.id },
       quantity: dto.quantity,
     };
 
+    await this.productRepository.decrement(
+      { id: product?.id },
+      'stock',
+      dto.quantity,
+    );
     await this.orderDetailsRepository.save(details);
 
     return order;
