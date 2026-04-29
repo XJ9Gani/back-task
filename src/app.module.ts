@@ -5,6 +5,8 @@ import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { FileModule } from './modules/file/file.module';
+import { addTransactionalDataSource } from 'typeorm-transactional';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -24,6 +26,13 @@ import { FileModule } from './modules/file/file.module';
         autoLoadEntities: true,
         synchronize: false,
       }),
+      dataSourceFactory: async (options) => {
+        if (!options) {
+          throw new Error('Invalid options passed');
+        }
+
+        return addTransactionalDataSource(new DataSource(options));
+      },
       inject: [ConfigService],
     }),
     OrdersModule,

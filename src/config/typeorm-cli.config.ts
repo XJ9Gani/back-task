@@ -4,12 +4,17 @@ import { InitialSchema1776932874525 } from 'src/migrations/1776932874525-initial
 import { Category } from 'src/modules/categories/entity/category.entity';
 import { Product } from 'src/modules/products/entity/product.entity';
 import { DataSource } from 'typeorm';
+import {
+  addTransactionalDataSource,
+  initializeTransactionalContext,
+  StorageDriver,
+} from 'typeorm-transactional';
 
 config();
 
 const configService = new ConfigService();
 
-export default new DataSource({
+const dataSource = new DataSource({
   type: 'postgres',
   host: configService.get('POSTGRES_HOST'),
   port: +configService.get('POSTGRES_PORT'),
@@ -19,3 +24,7 @@ export default new DataSource({
   entities: [Product, Category],
   migrations: [InitialSchema1776932874525],
 });
+initializeTransactionalContext({
+  storageDriver: StorageDriver.ASYNC_LOCAL_STORAGE,
+});
+addTransactionalDataSource(dataSource);
