@@ -7,6 +7,7 @@ import {
   Param,
   Put,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -82,7 +83,7 @@ export class OrdersController {
     return this.ordersService.updateOrder(id, dto);
   }
 
-  @Put('/:id')
+  @Patch('/:id')
   @ApiOkResponse({
     type: UpdateOrderDto,
     description: 'Order Updates',

@@ -1,19 +1,13 @@
 import { OrderDetails } from 'src/modules/orders/entities/order_details.entity';
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  CreateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
-  date: string;
+  @Column()
+  date: Date;
 
   @Column()
   discount: number;

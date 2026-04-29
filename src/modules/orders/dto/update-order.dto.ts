@@ -11,17 +11,32 @@ export class UpdateOrderDto extends PartialType(CreateOrderDto) {
   discount: number;
 
   @IsString()
+  @ApiProperty({
+    description: 'Customer full name',
+    example: 'Marat maratov',
+  })
   customer_name: string;
 
   @IsString()
   @ApiProperty({
+    description: 'Order current status',
     example: 'Paid',
+    enum: ['Pending', 'Paid', 'Not paid'],
   })
   status: string;
 
   @IsNumber()
+  @ApiProperty({
+    description: 'Purchased product id',
+    example: 5,
+  })
   product_id: number;
 
+  @IsPositive()
+  @ApiProperty({
+    description: 'Purchased product quantity',
+    example: 10,
+  })
   @IsPositive()
   quantity: number = 1;
 }

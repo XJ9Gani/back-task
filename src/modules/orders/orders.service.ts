@@ -6,7 +6,6 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderDetails } from 'src/modules/orders/entities/order_details.entity';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Transactional } from 'typeorm-transactional';
-import dayjs from 'dayjs';
 
 @Injectable()
 export class OrdersService {
@@ -55,10 +54,8 @@ export class OrdersService {
 
   @Transactional()
   async createOrder(dto: CreateOrderDto): Promise<Order> {
-    const order = await this.orderRepository.save({
-      ...dto,
-      date: dayjs().format('YYYY-MM-DD'),
-    });
+    const orderEntity = this.orderRepository.create(dto);
+    const order = await this.orderRepository.save(orderEntity);
 
     const details = {
       order,

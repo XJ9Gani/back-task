@@ -5,7 +5,7 @@ export class InitialSchema1776932874525 implements MigrationInterface {
     await queryRunner.query(`
     CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
-        date TIMESTAMP,
+        date TIMESTAMP DEFAULT now(),
         discount NUMERIC,
         customer_name VARCHAR(255),
         status VARCHAR(50)

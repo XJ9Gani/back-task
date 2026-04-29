@@ -28,3 +28,5 @@ initializeTransactionalContext({
   storageDriver: StorageDriver.ASYNC_LOCAL_STORAGE,
 });
 addTransactionalDataSource(dataSource);
+
+export default dataSource;
